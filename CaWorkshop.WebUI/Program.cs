@@ -1,9 +1,7 @@
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.EntityFrameworkCore;
 using CaWorkshop.WebUI.Data;
 using CaWorkshop.WebUI.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +25,15 @@ builder.Services.AddAuthentication()
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
+builder.Services.AddOpenApiDocument(config =>
+{
+    config.Title = "CaWorkshop API";
+});
+
 var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+
 #if DEBUG
 // Initialise and seed the database on start-up
 using (var scope = app.Services.CreateScope())
@@ -47,7 +53,7 @@ using (var scope = app.Services.CreateScope())
     }
 }
 #endif
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
@@ -60,6 +66,10 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseOpenApi();
+app.UseSwaggerUi3();
+
 app.UseRouting();
 
 app.UseAuthentication();
