@@ -23,6 +23,17 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>,
 
     public DbSet<TodoItem> TodoItems => Set<TodoItem>();
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+#if DEBUG
+        optionsBuilder
+            .LogTo(Console.WriteLine)
+            .EnableDetailedErrors();
+#endif
+
+        base.OnConfiguring(optionsBuilder);
+    }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
