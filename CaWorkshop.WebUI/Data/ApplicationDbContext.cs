@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Duende.IdentityServer.EntityFramework.Options;
 using CaWorkshop.WebUI.Models;
+using System.Security.Cryptography.X509Certificates;
 
 namespace CaWorkshop.WebUI.Data;
 
@@ -13,4 +14,7 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
         
     }
+
+    public DbSet<TodoList> TodoLists => Set<TodoList>();
+    public DbSet<TodoItem> TodoItems => Set<TodoItem>();
 }
