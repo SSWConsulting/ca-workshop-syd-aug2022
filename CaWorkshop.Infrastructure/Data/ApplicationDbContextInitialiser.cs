@@ -1,5 +1,4 @@
-﻿using CaWorkshop.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace CaWorkshop.Infrastructure.Data;
 

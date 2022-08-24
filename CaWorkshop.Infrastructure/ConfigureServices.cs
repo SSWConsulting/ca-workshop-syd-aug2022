@@ -1,4 +1,5 @@
-﻿using CaWorkshop.Infrastructure.Data;
+﻿using CaWorkshop.Application.Common.Interfaces;
+using CaWorkshop.Infrastructure.Data;
 using CaWorkshop.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,9 @@ public static class ConfigureServices
 
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(connectionString));
+
+        services.AddScoped<IApplicationDbContext, ApplicationDbContext>(sp => 
+            sp.GetRequiredService<ApplicationDbContext>());
 
         services.AddScoped<ApplicationDbContextInitialiser>();
 
