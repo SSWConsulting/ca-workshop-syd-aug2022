@@ -1,34 +1,11 @@
-using CaWorkshop.WebUI.Data;
-using CaWorkshop.WebUI.Models;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.EntityFrameworkCore;
+using CaWorkshop.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
-builder.Services.AddScoped<ApplicationDbContextInitialiser>();
-
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
-
-builder.Services.AddIdentityServer()
-    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
-
-builder.Services.AddAuthentication()
-    .AddIdentityServerJwt();
-
-builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
-
-builder.Services.AddOpenApiDocument(config =>
-{
-    config.Title = "CaWorkshop API";
-});
+builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddApplicationServices();
+builder.Services.AddPresentationServices();
 
 var app = builder.Build();
 
@@ -68,7 +45,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseOpenApi();
+
 app.UseSwaggerUi3();
+
 app.UseReDoc(config =>
     config.Path = "/redoc");
 
