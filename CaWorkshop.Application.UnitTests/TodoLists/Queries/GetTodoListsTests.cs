@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using CaWorkshop.Application.TodoLists.Queries.GetTodoLists;
-using CaWorkshop.Infrastructure.Data;
+﻿using CaWorkshop.Application.TodoLists.Queries.GetTodoLists;
 
 namespace CaWorkshop.Application.UnitTests.TodoLists.Queries.GetTodoLists;
 
