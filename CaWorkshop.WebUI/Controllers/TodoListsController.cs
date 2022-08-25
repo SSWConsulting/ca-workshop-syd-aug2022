@@ -1,7 +1,9 @@
+using System.ComponentModel.DataAnnotations;
 using CaWorkshop.Application.TodoLists.Commands.CreateTodoList;
 using CaWorkshop.Application.TodoLists.Commands.DeleteTodoList;
 using CaWorkshop.Application.TodoLists.Commands.UpdateTodoList;
 using CaWorkshop.Application.TodoLists.Queries.GetTodoLists;
+using CaWorkshop.WebUI.Filters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CaWorkshop.WebUI.Controllers;
@@ -24,7 +26,7 @@ public class TodoListsController : ApiControllerBase
 
     // PUT: api/TodoLists/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutTodoList(int id, UpdateTodoListCommand command)
+    public async Task<IActionResult> PutTodoList([Required] int id, UpdateTodoListCommand command)
     {
         if (id != command.Id) return BadRequest();
 
