@@ -49,12 +49,14 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseOpenApi();
-
-app.UseSwaggerUi3();
+app.UseSwaggerUi3(config =>
+   config.DocumentPath = "/api/v1/specification.json");
 
 app.UseReDoc(config =>
-    config.Path = "/redoc");
+{
+    config.Path = "/redoc";
+    config.DocumentPath = "/api/v1/specification.json";
+});
 
 app.UseRouting();
 
@@ -67,6 +69,6 @@ app.MapControllerRoute(
     pattern: "{controller}/{action=Index}/{id?}");
 app.MapRazorPages();
 
-app.MapFallbackToFile("index.html");;
+app.MapFallbackToFile("index.html"); ;
 
 app.Run();
