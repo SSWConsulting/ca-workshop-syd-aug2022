@@ -27,7 +27,7 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>,
     {
 #if DEBUG
         optionsBuilder
-            .LogTo(Console.WriteLine)
+            //.LogTo(Console.WriteLine)
             .EnableDetailedErrors();
 #endif
 
