@@ -17,6 +17,7 @@ public class CreateTodoListCommandValidator
             .MaximumLength(240)
             .NotEmpty()
             .MustAsync(BeUniqueTitle)
+                .WithErrorCode("UNIQUE_TITLE")
                 .WithMessage("The specified '{PropertyName}' ({PropertyValue}) already exists. 😡");
     }
 
